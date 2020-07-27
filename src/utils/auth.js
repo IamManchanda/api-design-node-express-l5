@@ -66,5 +66,28 @@ export const signin = async (req, res) => {
 };
 
 export const protect = async (req, res, next) => {
+  const bearer = req.headers.authorization;
+  if (!bearer || !bearer.startsWith("Bearer ")) {
+    return res.status(401).end();
+  }
+  const token = bearer.split("Bearer ")[1].trim();
+  if (!token) {
+    return res.status(401).send({
+      message: "Not authenticated",
+    });
+  }
+  try {
+    const payload = await verifyToken(token);
+    const user = await User.findById(payload.id)
+      .select("-password")
+      .lean()
+      .exec();
+    if (!user) {
+      return res.status(401).end();
+    }
+    req.user = user;
+  } catch (e) {
+    return res.status(401).end();
+  }
   next();
 };

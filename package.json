@@ -9,7 +9,7 @@
     "test": "cross-env NODE_ENV=testing jest --forceExit --detectOpenHandles  --silent",
     "test-routes": "npm run test -t router",
     "test-models": "npm run test -t model",
-    "test-controllers": "yarn test -t controllers",
+    "test-controllers": "npm run test -t controllers crud",
     "test-auth": "npm run test -t auth",
     "dev": "nodemon --exec npm run restart",
     "restart": "rimraf dist && npm run build && npm run start",
@@ -60,7 +60,9 @@
     "verbose": true,
     "testURL": "http://localhost/",
     "testEnvironment": "node",
-    "setupTestFrameworkScriptFile": "<rootDir>/test-db-setup.js",
+    "setupFilesAfterEnv": [
+      "<rootDir>/test-db-setup.js"
+    ],
     "testPathIgnorePatterns": [
       "dist/"
     ],
