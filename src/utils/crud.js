@@ -47,7 +47,9 @@ export const updateOne = (model) => async (req, res) => {
           _id: req.params.id,
         },
         req.body,
-        { new: true }
+        {
+          new: true,
+        }
       )
       .lean()
       .exec();
@@ -69,11 +71,9 @@ export const removeOne = (model) => async (req, res) => {
       createdBy: req.user._id,
       _id: req.params.id,
     });
-
     if (!removed) {
       return res.status(400).end();
     }
-
     return res.status(200).json({ data: removed });
   } catch (e) {
     console.error(e);

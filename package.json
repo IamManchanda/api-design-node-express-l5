@@ -10,7 +10,8 @@
     "test-routes": "npm run test -t router",
     "test-models": "npm run test -t model",
     "test-controllers": "npm run test -t controllers crud",
-    "test-auth": "npm run test -t auth",
+    "test-auth": "npm run test -t auth server",
+    "test-all": "npm run test -t router model controllers crud auth server",
     "dev": "nodemon --exec npm run restart",
     "restart": "rimraf dist && npm run build && npm run start",
     "start": "node dist/index.js"

@@ -18,7 +18,7 @@ global.newId = () => {
 
 const remove = (collection) =>
   new Promise((resolve, reject) => {
-    collection.remove((err) => {
+    collection.deleteMany((err) => {
       if (err) return reject(err);
       resolve();
     });
@@ -36,6 +36,9 @@ beforeEach(async (done) => {
     try {
       await mongoose.connect(url + db, {
         useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
         autoIndex: true,
       });
       await clearDB();
