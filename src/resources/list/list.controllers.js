@@ -1,4 +1,4 @@
-import { crudControllers } from '../../utils/crud'
-import { List } from './list.model'
+import { crudControllers } from "../../utils/crud";
+import { List } from "./list.model";
 
-export default crudControllers(List)
+export default crudControllers(List);
